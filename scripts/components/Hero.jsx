@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
-import Moment from "moment";
 
-
-class Hero extends Component{
+class Hero extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {
-            estilos: {
+            style: {
                 backgroundColor: "#43d8c9",
                 color: "white",
                 padding: "30px",
@@ -18,23 +15,23 @@ class Hero extends Component{
 
     
     render(){
+        const {filters} = this.props;
+        const {style} = this.state;
         return(
-            <section style={this.state.estilos} className="hero is-primary">
-                <div className="hero-body">
-                    <div className="container">
-                    <h1 className="title">Hoteles</h1>
-                    <h2 className="subtitle">
-                    desde el 
-                    <strong> {Moment(this.props.filters.dateFrom).format("D [de] MMMM [del] YYYY")} </strong> 
-                    hasta el <strong>{Moment(this.props.filters.dateTo).format("D [de] MMMM [del] YYYY")}</strong>
-                    {/* {Moment.locale()}  */}
-                    {/* desde el <strong>dddd, DD de mmmm de AAAA</strong> hasta el <strong>dddd, DD de mmmm de AAAA</strong> */}
-                    </h2>
+            <React.Fragment>
+                <section style={style} className="hero is-primary">
+                    <div className="hero-body">
+                        <div className="container">
+                        <h1 className="title">Hoteles</h1>
+                        <h2 className="subtitle">
+                            desde el 
+                            <strong> {moment(filters.dateFrom).format("dddd, D [de] MMMM [del] YYYY")} </strong> 
+                            hasta el <strong>{moment(filters.dateTo).format("dddd, D [de] MMMM [del] YYYY")}</strong>                
+                        </h2>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </React.Fragment>
         );
     }
 }
-
-export default Hero;

@@ -1,20 +1,12 @@
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import './styles/App.css';
-import Hero from "./components/Hero";
-import Filters from "./components/Filters";
-// import Hoteles from "./components/Hoteles";
-import Moment from "moment";
-import 'bulma/css/bulma.css';
 
-class App extends Component{
+class App extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
       filters: {
-        dateFrom: Moment(today).format("YYYY-MM-DD"),
-        dateTo: Moment().add(1, "month").format("YYYY-MM-DD"),
+        dateFrom: moment(today).format("YYYY-MM-DD"),
+        dateTo: moment().add(1, "month").format("YYYY-MM-DD"),
         country: "",
         price: 0,
         room: 0
@@ -31,6 +23,21 @@ class App extends Component{
     });
   }
 
+
+  render(){
+    return(
+      <React.Fragment>
+        <Hero filters={this.state.filters} />
+       {/* <Filters filters={this.state.filters} onFilterChange={this.handleFilterChange} /> */}
+       {/* <Hoteles />  */}
+      </React.Fragment>
+    );  
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("app"));
+
+
   // https://es.reactjs.org/docs/faq-state.html
 
   // incrementCount() {
@@ -43,19 +50,3 @@ class App extends Component{
   // this.setState((state, props) => ({
   //   counter: state.counter + props.increment
   // }));
-
-
-  render(){
-    return(
-      <div>
-        <h1>App</h1>
-       {/* <Hero filters={this.state.filters} />
-       <Filters filters={this.state.filters} onFilterChange={this.handleFilterChange} /> */}
-       {/* <Hoteles />  */}
-      </div>
-    );  
-  }
-}
-
-
-ReactDOM.render(<App />, document.getElementById("app"));
