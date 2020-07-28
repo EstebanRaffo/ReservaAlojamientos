@@ -29,7 +29,6 @@ class App extends React.Component{
     this.setState({filters}, this.filterHotels(this.state.filters, this.state.hotels)); 
   }
 
-  // Ver de hacer encadenamiento
   filterHotels = (filters, hotels) => {
     var filteredHotels = this.filterByDates(hotels, filters.dateFrom, filters.dateTo);
     
