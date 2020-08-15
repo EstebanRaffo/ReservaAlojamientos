@@ -6,7 +6,7 @@ class App extends React.Component{
     this.state = {
       filters: {
         dateFrom: moment().format("YYYY-MM-DD"),
-        dateTo: moment().add(1, "month").format("YYYY-MM-DD"),
+        dateTo: moment().add(1, "day").format("YYYY-MM-DD"),
         country: 0,
         price: 0,
         room: 0
@@ -82,7 +82,7 @@ class App extends React.Component{
 
   filterByDates = (hotels, dateFrom, dateTo) => {
     return hotels.filter(hotel => {
-      return moment(hotel.availabilityFrom).format("YYYY-MM-DD") >= dateFrom && moment(hotel.availabilityTo).format("YYYY-MM-DD") <= dateTo
+      return dateFrom >= moment(hotel.availabilityFrom).format("YYYY-MM-DD") && dateTo <= moment(hotel.availabilityTo).format("YYYY-MM-DD")
     })
   }
 
@@ -106,16 +106,19 @@ class App extends React.Component{
 
   render(){
     const {filters, filteredHotels, hotels} = this.state;
-    console.log(hotels)
+    console.log(hotels.map(hotel => {
+      const availabilityFrom = moment(hotel.availabilityFrom).format("YYYY-MM-DD")
+      const availabilityTo =  moment(hotel.availabilityTo).format("YYYY-MM-DD")
+      return {"Hotel: ": hotel.name, "disponible desde: ": availabilityFrom, "disponible hasta: ": availabilityTo}
+    }))
     console.log(filters)
     console.log(filteredHotels.length)
     console.log(
       filteredHotels.map(hotel => {
         const availabilityFrom = moment(hotel.availabilityFrom).format("YYYY-MM-DD")
         const availabilityTo =  moment(hotel.availabilityTo).format("YYYY-MM-DD")
-        return {"disponible desde: ": availabilityFrom, "disponible hasta: ": availabilityTo}
-      })
-    )
+        return {"Hotel: ": hotel.name, "disponible desde: ": availabilityFrom, "disponible hasta: ": availabilityTo}
+      }))
     return(
       <React.Fragment>
          <Hero filters={filters} />
