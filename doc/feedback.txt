@@ -1,0 +1,34 @@
+Hola Esteban!
+
+El proyecto ya se encuentra aprobado, felicidades!
+
+En general, me gusto bastante como estructuraste el código, la inclusión de la librería momentJS estuvo muy buena, eso ayuda 
+considerablemente a manejar las fechas también.
+
+Las sugerencias que tengo para vos son mas a nivel de forma del código, pequeños detalles que estarían buenos considerar para el futuro.
+Por ejemplo:
+
+Para las funciones filterByPrice y filterByCountry podes hacer solo una función que se llame filterByCondicion ya que ambas funciones 
+se parecen en todo excepto el argumento que usas para la condición. Pudieras hacer esto:
+
+filterByCondicion = (hotels, condicion) => {
+  return hotels.filter(hotel => hotel[condicion] === condicion)
+}
+
+Esto es por que estamos accediendo a la propiedad del objeto hotel por brackets en vez de por punto.
+
+Otra cosa es que podes hacer destructuring directamente sobre la definición de los parámetros de la función, por ejemplo en el 
+componente DataTag pudieras hacer esto:
+
+function DataTag({ name, icon })
+
+Y de esa forma te ahorras el const {name, icon} = props. Por cierto, en el mismo archivo hay una oportunidad de hacer mas destructuring
+en las variables country, city y rooms, a las cuales llamaste desde el objeto props.
+
+En el componente Filter yo evitaría a todo costo definir estilos CSS. Si estas en una de que si o si tenes que definir los estilos 
+inline en vez de usar un CSS yo los almcenaria en una const. Ahora, si queres hacer algo con los estilos, por ejemplo, modificarlos en
+base a un click u otro evento, o sabes que van a cambiar en el tiempo, puede ser que se almacenen en estado, de resto sugeriría un 
+archivo CSS o almacenar el objeto en una const. Mismo comentario para los componentes Hero. Hotel y Hoteles.
+
+De resto, me parece que el objetivo se supera y la aplicación cumple con toda la checklist así que de nuevo felicidades. Espero que 
+pueda evaluar tu segundo proyecto.
